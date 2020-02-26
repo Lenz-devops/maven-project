@@ -82,7 +82,8 @@
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>taglist-maven-plugin</artifactId>
             </plugin>
-          </configuration>
+
+          <!-- </configuration> -->
         </plugin>
       </plugins>
 
@@ -163,7 +164,7 @@
         </plugins>
       </pluginManagement>
     </build>
-  </reporting>
+  <!-- </reporting> -->
 
   <dependencyManagement>
     <dependencies>
