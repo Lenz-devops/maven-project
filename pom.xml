@@ -29,8 +29,8 @@
     </site>
   </distributionManagement>
 
-  <build>
-    <reporting>
+  <reporting>
+    <build>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -162,8 +162,8 @@
           </plugin>
         </plugins>
       </pluginManagement>
-    </reporting>
-  </build>
+    </build>
+  </reporting>
 
   <dependencyManagement>
     <dependencies>
