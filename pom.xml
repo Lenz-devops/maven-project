@@ -29,7 +29,7 @@
     </site>
   </distributionManagement>
 
-  <reporting>
+  <!-- <reporting> -->
     <build>
       <plugins>
         <plugin>
@@ -83,7 +83,7 @@
               <artifactId>taglist-maven-plugin</artifactId>
             </plugin>
 
-          <!-- </configuration> -->
+          </configuration>
         </plugin>
       </plugins>
 
