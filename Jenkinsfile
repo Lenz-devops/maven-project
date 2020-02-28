@@ -39,7 +39,6 @@ pipeline {
 
                 failure {
                     echo ' Deployment failed.'
-                    mail to: florent.lauber@gmail.com, subject: "The Pipeline failed :("
                 }
             }
         }
