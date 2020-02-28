@@ -1,2 +1,1 @@
-version 3 - Testing Jenkinsfile and Jenkins as code!! 
-Hello from me to this wonderful World of Jenkins, CI/CD and automation!!
+version 3 - hello world!
