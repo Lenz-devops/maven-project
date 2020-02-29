@@ -1,1 +1,1 @@
-version 4 - Hello from me to this wonderful World of Jenkins and, CI/CD and, automation!!!
+version 7 - Hello from an EC2 instance to this wonderful World of Jenkins, Tomcat, CI/CD and, automation!!!

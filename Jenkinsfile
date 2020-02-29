@@ -1,8 +1,14 @@
 pipeline {
     agent any
 
-    tools {
-    maven 'localMaven'
+
+    // tools {
+    // maven 'localMaven'
+    // }
+
+    parameters {
+        string(name: 'tomcat_dev', defaultValue: '54.80.138.56', description: 'Staging server')
+        string(name: 'tomcat_prod', defaultValue: '3.223.192.101', description: 'Production server')
     }
 
     triggers {
@@ -17,36 +23,25 @@ pipeline {
             post {
                 success {
                     echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '**/*.war'
+                    archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
         }
 
-        stage('Deploy to Staging'){
-            steps {
-                build job: 'deploy-to-staging'
-            }
-        }
-        
-        stage ('Deploy to Production'){
-            steps{
-                timeout(time:5, unit:'DAYS'){
-                    input message:'Approve PRODUCTION Deployment?'
+        stage ('Deployments'){
+            parallel{
+                stage ('Deploy to Staging'){
+                    steps {
+                        sh "scp -i /Users/lenz/.ssh/testkey.pem **/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps"
+                    }
                 }
 
-                build job: 'deploy-to-Prod'
-            }
-            post {
-                success {
-                    echo 'Code deployed to Production.'
-                }
-
-                failure {
-                    echo ' Deployment failed.'
+                stage ("Deploy to Production"){
+                    steps {
+                        sh "scp -i /Users/lenz/.ssh/testkey.pem **/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps"
+                    }
                 }
             }
         }
     }
-
-
 }
