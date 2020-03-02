@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'tomcat:8.5.51'
-            args '-p 7070:8080 -v ./webapp/target/*.war:/usr/local/tomcat/webapps/'
+            args '-u root -p 7070:8080 -v ./webapp/target/*.war:/usr/local/tomcat/webapps/'
         }
     }
 
