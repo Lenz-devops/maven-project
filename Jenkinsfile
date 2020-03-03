@@ -11,6 +11,10 @@ pipeline {
     maven 'localMaven'
     }
 
+    triggers {
+        pollSCM('* * * * *')
+    }
+
     stages {
         stage('Build') {
             steps {
