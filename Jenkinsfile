@@ -1,11 +1,11 @@
 pipeline {
-    agent any
-    // {
-    //     docker {
-    //         image 'tomcat:8.5.51'
-    //         args '-u root -p 7070:8080 -v ./webapp/target/*.war:/usr/local/tomcat/webapps/'
-    //     }
-    // }
+    agent 
+    {
+        docker {
+            image 'tomcat:8.5.51'
+            args '-u root -p 7072:8080 -v ./webapp/target/*.war:/usr/local/tomcat/webapps/'
+        }
+    }
 
     tools {
     maven 'localMaven'
@@ -18,9 +18,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                echo 'Building package'
                 sh 'mvn clean package'
-                // sh "/usr/local/bin/docker build -t tomcat-docker-webapp:${env.BUILD_ID} ."
-                sh "${docker} build -t tomcat-docker-webapp:${env.BUILD_ID} ."
+                echo 'building docker image'
+                sh "/usr/local/bin/docker build -t tomcat-docker-webapp:${env.BUILD_ID} ."
+                echo 'running docker image'
+                sh "/usr/local/bin/docker container run -it -d --name jenkins-test-${env.BUILD_ID} -p 90${env.BUILD_ID}:8080 tomcat-docker-webapp:${env.BUILD_ID}"
+ 
             }
         }
 
